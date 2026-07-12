@@ -1,0 +1,7 @@
+services:
+ app:
+  build: .
+  image: todoapp:v2
+  container_name: todoapp-container
+  ports:
+   - 8000:8000
