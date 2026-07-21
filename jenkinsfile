@@ -1,0 +1,40 @@
+pipeline {
+    agent any 
+
+    environment {
+        CONTINAER_NAME = "task_manager_app"
+        IMAGE_NAME = "image_app"
+        PORT = 8000
+        EMAIL="mdshaisakhter840@gmail.com"
+
+    }
+
+    stages{
+        stage("Clonning reposiotry"){
+            steps{
+                echo "Clonning project repository...."
+
+               git branch: 'main'
+               url: 'https://github.com/MdShais007/django-task-manager.git'
+
+            }
+        }
+
+        stags("Building Image"){
+            steps{
+                sh " docker compose build "
+            }
+        }
+        stage("Stop existing container"){
+            steps{
+                sh " docker compose down "
+            }
+        }
+
+        stage("deploy container"){
+            steps{
+                sh " docker compose up -d "
+            }
+        }
+    }
+}
