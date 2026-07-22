@@ -27,7 +27,7 @@ pipeline {
         }
         stage('Migrate') {
     steps {
-        sh 'docker compose run --rm web python manage.py migrate'
+        sh 'docker compose run --rm app python manage.py migrate'
     }
 }
         stage("Stop existing container"){
