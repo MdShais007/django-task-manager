@@ -14,13 +14,13 @@ pipeline {
             steps{
                 echo "Clonning project repository...."
 
-               git branch: 'main'
+               git branch: 'main',
                url: 'https://github.com/MdShais007/django-task-manager.git'
 
             }
         }
 
-        stags("Building Image"){
+        stage("Building Image"){
             steps{
                 sh " docker compose build "
             }
