@@ -10,7 +10,7 @@ pipeline {
     }
 
     stages{
-        stage("Clonning reposiotry"){
+        stage("Clonning reposiotry or checout"){
             steps{
                 echo "Clonning project repository...."
 
