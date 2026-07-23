@@ -25,11 +25,7 @@ pipeline {
                 sh " docker compose build "
             }
         }
-        stage('Migrate') {
-    steps {
-        sh 'docker compose run --rm app python manage.py migrate'
-    }
-}
+      
         stage("Stop existing container"){
             steps{
                 sh " docker compose down "
@@ -41,5 +37,11 @@ pipeline {
                 sh " docker compose up -d "
             }
         }
+        stage('Migrate') {
+    steps {
+        sh 'docker compose exec -T app python manage.py migrate'
     }
+
+    }
+}
 }
