@@ -44,4 +44,13 @@ pipeline {
 
     }
 }
+
+ post {
+        always {
+            mail to: 'team@yourdomain.com',
+                 subject: "Status of Jenkins Build: ${currentBuild.fullDisplayName}",
+                 body: "The build completed with status: ${currentBuild.currentResult}. Check details at: ${env.BUILD_URL}"
+        }
+    }
+
 }
