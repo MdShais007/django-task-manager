@@ -28,7 +28,7 @@ pipeline {
       
         stage("Stop existing container"){
             steps{
-                sh " docker compose down "
+                sh " docker compose down || true "
             }
         }
 
@@ -47,9 +47,16 @@ pipeline {
 
  post {
         always {
-            mail to: 'team@yourdomain.com',
-                 subject: "Status of Jenkins Build: ${currentBuild.fullDisplayName}",
-                 body: "The build completed with status: ${currentBuild.currentResult}. Check details at: ${env.BUILD_URL}"
+            emailext(
+                to: 'mdshaisakhter840@gmail.com',
+                subject: "Status of Jenkins Build: ${currentBuild.fullDisplayName}",
+                body: """The build completed with status: ${currentBuild.currentResult}.
+
+Job: ${env.JOB_NAME}
+Build Number: ${env.BUILD_NUMBER}
+Build URL: ${env.BUILD_URL}
+"""
+            )
         }
     }
 
